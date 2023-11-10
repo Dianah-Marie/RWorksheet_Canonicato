@@ -1,0 +1,289 @@
+---
+title: "RWorksheet_Canonicato#4b."
+author: "Dianah Marie Canonicato"
+date: "2023-11-09"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#1
+```{r}
+
+#1
+#Using Loop Function
+
+vectorA <- c(1,2,3,4,5)
+matrixA <- matrix(0, nrow=5, ncol=5)
+
+  for (i in 1:5)
+    for (j in 1:5)
+    {
+      matrixA [i,j] <-abs (vectorA[i] - vectorA[j])
+    }
+matrixA
+
+```
+
+#2
+```{r}
+#2 Print the string "*" using for() function.
+
+for (i in 1:5)
+  cat(paste0("\"",rep ("*",i), "\""), "\n")
+
+
+```
+
+
+#3
+```{r}
+
+start_value <- as.integer(readline(prompt="Enter a positive integer: "))
+
+if (is.na(start_value) || start_value == 0) {
+  cat("No input")
+} else {
+  a <- start_value
+  b <- 0
+
+  cat("Fibonacci sequence starting from", start_value, ":\n")
+  cat(start_value,"")
+
+  repeat {
+      fib <- a+b
+      if (fib > 500){
+        break 
+      }
+      cat(fib," ")
+      a <- b
+      b<-fib
+    
+  }
+}
+
+
+
+
+```
+
+#Using Basic Graphics (plot(),barplot(),pie(),hist())
+#4
+```{r SHOES_SIZE, echo=TRUE}
+#4. Import the dataset as shown in Figure 1 you have created previously. 
+
+#a. What is the R script for importing an excel or a csv file? Display the first 6 rows of the dataset? Show your codes and its result
+
+library("readr")
+
+accessData <- read_csv("/cloud/project/worksheet#4/shoes_size.csv")
+head(accessData)
+```
+
+```{r}
+
+#b
+
+
+
+malesub <- subset(accessData, Gender == "M")
+malesub
+
+femalesub <- subset(accessData, Gender == "F")
+femalesub
+
+```
+
+```{r}
+#c
+
+totalMaleFemale <- table(accessData$Gender)
+barplot(totalMaleFemale,
+        main = "Number of Males and Females",
+        xlab = "Gender",
+        ylab = "Count",
+        col = c("pink", "yellow"),
+        legend.text = rownames(totalMaleFemale),
+        beside = TRUE)
+
+```
+
+#5
+
+```{r}
+# Define the data
+data <- c(Food = 60, Electricity = 10, Savings = 5, Miscellaneous = 25)
+
+# Calculate percentages and format them as strings
+percentages <- paste(round(100 * data / sum(data), 1), "%", sep = "")
+
+# Create a pie chart
+pie(data, labels = paste(names(data), " (", percentages, ")", sep = ""), col = rainbow(length(data)), main = "Expense Distribution")
+
+# Add a legend
+legend("topright", names(data), cex = 0.8, fill = rainbow(length(data)))
+
+```
+
+#6 
+
+```{r}
+data(iris)
+
+#6a
+str(iris)
+
+#The 'Sepal.Length' column contains numerical values representing the length of the sepals of each flower.
+#The 'Sepal.Width' column contains numerical values representing the width of the sepals of each flower.
+#The 'Petal.Length' column contains numerical values representing the length of the petals of each flower.
+#The 'Petal.Width' column contains numerical values representing the width of the petals of each flower.
+#The 'Species' column contains categorical data, represented as a factor with 3 levels: "setosa", "versicolor", and "virginica".
+```
+#b
+```{r}
+#6b
+
+meanOfFlowers <- colMeans(iris[,1:4])
+meanOfFlowers
+```
+#c
+```{r}
+#6c
+
+species_count <- table(iris$Species)
+pie(species_count, labels = species_count, col = rainbow(length(species_count)), main = "Species Distribution")
+legend("topright", names(species_count), cex = 0.8, fill = rainbow(length(species_count)))
+```
+#d
+```{r}
+#6d 
+# Subset the iris data set into the three species.
+setosa_subset <- subset(iris, Species == "setosa")
+versicolor_subset <- subset(iris, Species == "versicolor")
+virginica_subset <- subset(iris, Species == "virginica")
+
+# Display the last six rows of each species.
+tail(setosa_subset, 6)
+tail(versicolor_subset, 6)
+tail(virginica_subset, 6)
+```
+#e
+```{r}
+#6e
+
+# Convert the "Species" column to a factor
+iris$Species <- as.factor(iris$Species)
+
+# Create a scatterplot
+plot(
+  Sepal.Length ~ Sepal.Width,
+  data = iris,
+  pch = as.integer(iris$Species),  # Use different pch symbols for each species
+  col = as.integer(iris$Species),  # Use different colors for each species
+  xlab = "Sepal Length",
+  ylab = "Sepal Width",
+  main = "Iris Dataset",
+  sub = "Sepal width and length"
+)
+
+# Add a legend
+legend("topright", legend = levels(iris$Species), col = 1:3, pch = 1:3, cex = 0.8, title = "Species")
+```
+#f
+```{r}
+#f. Interpret the result.
+#This R code converts the "Species" column in the iris dataset to a factor, and then creates a scatterplot of sepal length against sepal width.
+
+#In the scatterplot, each species is represented by a different symbol (pch) and color. The pch parameter is set to convert the iris$Species factor to an integer, which R will then interpret as different symbols for each level of the factor.
+
+#A legend is added to the top right corner of the plot to help interpret the colors and symbols. The title of the legend is set to "Species", and the labels within the legend are set to the levels of the iris$Species factor.
+
+#When you run this code, you will see a scatterplot with sepal length on the x-axis and sepal width on the y-axis. Each species is represented by a different color and symbol, and the plot is titled "Iris Dataset".
+
+```
+
+#7 Basic Cleaning and Transformation of Objects
+
+```{r}
+library(readxl)
+alexa_file <- read_excel("/cloud/project/worksheet#4/alexa-file.xlsx")
+alexa_file
+```
+#7a
+```{r}
+alexa_file$variation <- gsub("Black  Dot", "BlackDot", alexa_file$variation)
+alexa_file$variation <- gsub("Black  Plus", "BlackPlus", alexa_file$variation)
+alexa_file$variation <- gsub("Black  Show", "BlackShow", alexa_file$variation)
+alexa_file$variation <- gsub("Black  Spot", "BlackSpot", alexa_file$variation)
+
+alexa_file$variation <- gsub("White  Dot", "WhiteDot", alexa_file$variation)
+alexa_file$variation <- gsub("White  Plus", "WhitePlus", alexa_file$variation)
+alexa_file$variation <- gsub("White  Show", "WhiteShow", alexa_file$variation)
+alexa_file$variation <- gsub("White  Spot", "WhiteSpot", alexa_file$variation)
+
+alexa_file
+```
+#7b
+
+```{r}
+library("dplyr")
+
+var_total <- alexa_file %>% 
+  count(alexa_file$variation)
+
+var_total
+save(var_total, file = "VAR.RData")
+```
+
+#7c
+
+```{r}
+
+load("VAR.RData")
+var_total
+varNames <- var_total$`alexa_file$variation`
+
+totalPlot <- barplot(var_total$n,
+        names.arg = varNames,
+        main = "Total number of each variations",
+        xlab = "Name of Variations",
+        ylab = "Total of each Variatons",
+        col = 1:16,
+        space = 2)
+
+knitr::include_graphics("/cloud/project/worksheet#4/variations.png")
+```
+
+#7d
+
+```{r}
+blackVars <- var_total[var_total$`alexa_file$variation` %in% c("Black", "BlackPlus" , "BlackShow" ,"BlackSpot" , "BlackDot"), ]
+
+whiteVars <- var_total[var_total$`alexa_file$variation` %in% c("White", "WhiteDot", "WhitePlus", "WhiteShow", " WhiteSpot"), ]
+
+par(mfrow = c(1,2))
+
+barplot(height = blackVars$n,
+        names.arg = blackVars$`alexa_file$variation`,
+        col = c("black"),
+        main = "Black Variations",
+        xlab = "Variation",
+        ylab = "Count",
+        border = "black")
+
+barplot(height = whiteVars$n,
+        names.arg = whiteVars$`alexa_file$variation`,
+        col = c("black"),
+        main = "White Variations",
+        xlab = "Variation",
+        ylab = "Count",
+        border = "black")
+
+
+
+
+knitr::include_graphics("/cloud/project/worksheet#4/bw.png")
+
+```
