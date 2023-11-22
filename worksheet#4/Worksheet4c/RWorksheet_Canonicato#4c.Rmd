@@ -1,0 +1,58 @@
+---
+title: "RWorksheet_Canonicato#4c"
+author: "Dianah Marie Canonicato"
+date: "2023-11-22"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#1. Use the dataset mpg
+```{r}
+
+#a. Show your solutions on how to import a csv file into the environment.
+library(readr)
+mpg <- read.csv("mpg.csv")
+mpg
+```
+#b. Which variables from mpg dataset are categorical?
+```{r}
+categorical_vars <- c("manufacturer", "model", "trans", "drv", "fl", "class")
+categorical_vars
+```
+
+#c. Which are continuous variables?
+
+```{r}
+continuous_vars <- c("displ", "year", "cyl", "cty", "hwy")
+continuous_vars
+
+```
+#2. Which manufacturer has the most models in this data set? Which model has the most variations?
+
+```{r}
+#a. Group the manufacturers and find the unique models. Show your codes and result.
+
+
+```
+
+#b. Graph the result by using plot() and ggplot(). Write the codes and its result.
+```{r}
+
+
+
+```
+#3. Same dataset will be used. You are going to show the relationship of the model and the manufacturer.
+```{r}
+#a. What does ggplot(mpg, aes(model, manufacturer)) + geom_point() show?
+
+
+
+```
+#b. For you, is it useful? If not, how could you modify the data to make it more informative?
+```{r}
+#The plot shows the relationship between the model and the manufacturer. It can be useful to visualize the distribution of models across different manufacturers. To make it more informative, we can add color or size aesthetics to represent additional variables, such as the number of cylinders or fuel type.
+
+```
