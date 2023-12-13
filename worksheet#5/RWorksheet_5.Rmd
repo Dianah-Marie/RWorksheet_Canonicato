@@ -1,0 +1,83 @@
+---
+title: "RWorksheet#6"
+author: "Dianah Marie Canonicato"
+date: "2023-12-06"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+install.packages("Hmisc")
+install.packages("pastecs")
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+#1
+```{r}
+install.packages("Hmisc")
+install.packages("pastecs")
+
+library(Hmisc)
+library(pastecs)
+test <- data.frame(
+  Student = c(1,2,3,4,5,6,7,8,9,10),
+  PreTest = c(55,54,47,57,51,61,57,54,63,58),
+  PostTest = c(61,60,56,63,56,63,59,56,62,61)
+)
+summary_hmisc <- describe(test)
+
+summary_pastecs <- stat.desc(test)
+
+cat("Descriptive Statistics using Hmisc:\n")
+print(summary_hmisc)
+
+print(summary_pastecs)
+
+
+
+```
+#2
+```{r}
+Fertelizer_Data <- c(10, 10, 10, 20, 20, 50, 10, 20, 10, 50, 20, 50, 20, 10)
+OrderedFertilizer <- factor(Fertelizer_Data, levels = c(10, 20, 50))
+
+cat("Original data:\n")
+print(Fertelizer_Data)
+ordered_data <- OrderedFertilizer[order(OrderedFertilizer)]
+cat("\nOrdered data:\n")
+print(ordered_data)
+
+#The result is the ordered version of the original data, with the values arranged in ascending order.
+
+
+```
+#3
+```{r}
+#Using a factor variable is the most effective method for expressing the workout levels in R.
+#The three choices for activity levels in this instance are "n" (none), "l" (light), and "i" (intense). 
+#To appropriately describe the activity levels for each participant, you can use these levels to generate a factor variable.
+
+state <- c("tas", "sa", "qld", "nsw", "nsw", "nt", "wa", "wa", "qld",
+           "vic", "nsw", "vic", "qld", "qld", "sa", "tas", "sa", "nt",
+           "wa", "vic", "qld", "nsw", "nsw", "wa", "sa", "act", "nsw",
+           "vic", "vic", "act")
+
+state
+```
+#4
+```{r}
+States <- factor(state)
+cat("Original state data:\n")
+print(state)
+
+cat("\nFactor levels:\n")
+print(levels(States))
+
+cat("\nFactor representation:\n")
+print(States)
+
+#The result will show the original state data, the factor levels, and the factor representation. 
+#The factor levels will be automatically assigned based on the unique values in the state vector.
+```
+
